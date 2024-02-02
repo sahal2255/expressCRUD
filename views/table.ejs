@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Table</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        h1{
+            text-align: center;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #de5a5a;
+        }
+
+        th {
+            background-color: #1be164;
+        }
+        .delete{
+            background-color: red;
+            color: white;
+            width: 100px;
+            height: 30px;
+            border: 0;
+            border-radius: 10px;
+        }
+        .edit{
+            background-color: yellow;
+            width: 100px;
+            height: 30px;
+            border: 1px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>User Table</h1>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Reg. No</th>
+            <th>Email</th>
+            <th>Degree</th>
+            <th>Semester</th>
+            <th>Grade</th>
+            <th>Action</th>
+       
+
+
+
+        <% for (let index = 0; index < dataArray.length; index++) { %>
+            <tr>
+                <td><%= dataArray[index].name %></td>
+                <td><%= dataArray[index].id %></td>
+                <td><%= dataArray[index].email %></td>
+                <td><%= dataArray[index].degree %></td>
+                <td><%= dataArray[index].sem %></td>
+                <td><%= dataArray[index].grade %></td>
+                <td>
+                    <form method="get" action="/edit/<%= dataArray[index].id %>" style="display:inline;">
+                        <button type="submit" class="edit">Edit</button>
+                    </form>
+                    <!-- <form method="get" action="/edit/<%= dataArray[index].id %>" style="display:inline;"> -->
+
+                    <!-- <form method="get" action="/edit" style="display:inline;"> -->
+                        <!-- <input type="hidden" name="id" value="<%= dataArray[index].id %>"/> -->
+                        <!-- <button type="submit" class="edit">Edit</button>
+                    </form> -->
+
+
+                    <!-- <form method="get" action="/edit" style="display:inline;">
+                        <input type="hidden" name="id" value="<%= dataArray[index].id %>">
+                        <button type="submit" class="edit">Edit</button>
+                    </form> -->
+                    
+
+                    <form method="post" action="/delete" style="display:inline;" onsubmit="return deleteRow('<%= dataArray[index].id %>')">
+                        <input type="hidden" name="id" value="<%= dataArray[index].id %>">
+                        <!-- <input type="hidden" name="deleteIndex" value="<%= index %>"> -->
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+        
+    </table>
+    <script>
+        async function deleteRow(deleteId) {
+            const confirmation = confirm('Are you sure you want to delete this row?');
+            return confirmation; // If confirmed, the form will be submitted; otherwise, it won't
+        }
+    </script>
+
+
+    
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Sheet</title>
+    <!-- <link
+         href="https://fonts.googleapis.com/css2?family=Karlaital,wght@1,200&family=Nova+Square&family=Open+Sans:ital,wght@0,300;1,500&display=swap" 
+        rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Nova+Square&display=swap" rel="stylesheet"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(247, 107, 107);
+            
+            height: 900px;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgb(20, 23, 23);
+            
+        }
+
+        .heade {
+            color: rgb(36, 43, 43);
+            font-size: 60px;
+            text-align: center;
+           
+            margin-top: 50px;
+            margin-left: -50px;
+        }
+
+        .img {
+            height: 180px;
+            width: 200px;
+            margin-left: 650px;
+            margin-top: -120px;
+        }
+
+        section {
+            margin-left: 300px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 20px;
+        }
+
+        .form {
+            width: 400px;
+            padding: 40px;
+            background-color: rgb(186, 221, 235);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #sem {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border-style: none;
+        }
+
+        #gde {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border-style: none;
+        }
+
+        h2 {
+            color: rgb(21, 21, 21);
+            font-size: 25px;
+            
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            border-style: none;
+        }
+
+        .but {
+            height: 40px;
+            width: 130px;
+            font-size: 18px;
+            margin-left: 700px;
+            background-color: rgb(82, 211, 77);
+            border-color: rgb(10, 10, 10);
+            border-radius: 10px;
+            color: rgb(235, 230, 230);
+
+        }
+        .hom{
+            height: 40px;
+            width: 130px;
+            background-color: rgb(21, 125, 244);
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            margin-left: 700px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="heade">
+            <b>  </b>
+        </div>
+        <div class="nav">
+            <h1> Edit Form </h1>
+        </div>
+    </header>
+
+    <section id="forms-container">
+
+        <form action="/update" method="post" class="form" id="fi-name">
+
+            <h2>Name</h2>
+            <input type="text" placeholder="Enter Name" id="name" value="<%= data.name %>">
+            <small id="nameError" style="color: red;"></small>
+
+            <h2>Reg.No</h2>
+            <input type="number" placeholder="Enter Id" id="ide" name="ide" value="<%= data.id %>">
+            <small id="idError" style="color: red;"></small>
+
+          
+
+            <h2>E-mail</h2>
+            <input type="email" placeholder="Enter Email" id="mail" name="mail" value="<%= data.email %>">
+            <small id="mailError" style="color: red;"></small>
+
+        </form>
+
+        <form action="/update" method="post" class="form" id="fi-name">
+            
+            <h2>Degree</h2>
+            <input type="text" placeholder="Enter Degree" id="de" name="de"  value="<%= data.degree %>">
+            <small id="degreeError" style="color: red;"></small>
+
+
+            <h2>Semester</h2>
+            <select class="form-control" id="sem" name="sem" required>
+                <option value="Semester 1" <%= data.sem === 'Semester 1' ? 'selected' : '' %>>Semester 1</option>
+                <option value="Semester 2" <%= data.sem === 'Semester 2' ? 'selected' : '' %>>Semester 2</option>
+                <option value="Semester 3" <%= data.sem === 'Semester 3' ? 'selected' : '' %>>Semester 3</option>
+                <option value="Semester 4" <%= data.sem === 'Semester 4' ? 'selected' : '' %>>Semester 4</option>
+                <option value="Semester 5" <%= data.sem === 'Semester 5' ? 'selected' : '' %>>Semester 5</option>
+                <option value="Semester 6" <%= data.sem === 'Semester 6' ? 'selected' : '' %>>Semester 6</option>
+              </select>
+            <small id="semError" style="color: red;"></small>
+
+            <h2>Grade</h2>
+            <select class="form-control" id="gde" name="gde" required>
+                <option value="Distinction" <%= data.grede === 'Distinction' ? 'selected' : '' %>>Distinction</option>
+                <option value="First Class" <%= data.grade === 'First Class' ? 'selected' : '' %>>First Class</option>
+                <option value="Second Class" <%= data.grade === 'Second Class' ? 'selected' : '' %>>Second Class</option>
+                <option value="Fail" <%= data.grade === 'Fail' ? 'selected' : '' %>>Fail</option>
+              </select>
+            <small id="gradeError" style="color: red;"></small>
+            
+        </form>
+    </section>
+    <input type="hidden" name="editId" value="<%= data.id %>">
+    <button class="but" id="submit" type="submit"  onclick="validateForm()">Update</button>
+    <!-- <a href="/table" class="btn btn-secondary"> Home</a> -->
+    <button class="hom" onclick="redirectToTble()">Home</button>
+    
+
+    <!-- <button class="but" id="submit" type="submit" onclick="validateForm()"><b>Submit</b></button> -->
+    <script>
+       
+    function validateForm() {
+        const name = document.getElementById("name").value;
+        const id = document.getElementById("ide").value;
+        const email = document.getElementById("mail").value;
+        const degree = document.getElementById("de").value;
+        const sem = document.getElementById("sem").value;
+        const grade = document.getElementById("gde").value;
+        const editId = document.querySelector("input[name='editId']").value;
+        var isValid = true;
+
+        // Validation logic for the first form
+        let isNameValid = /^[a-zA-Z\s]{3,}$/.test(name);
+        if (!isNameValid) {
+            document.querySelector("#nameError").innerHTML = "Name should have at least 3 characters";
+            isValid = false;
+        } else {
+            document.querySelector("#nameError").innerHTML = "";
+        }
+
+        let isIdValid = /^\d{5,}$/.test(id);
+        if (!isIdValid) {
+            document.querySelector("#idError").innerHTML = "Id should have 5 numbers";
+            isValid = false;
+        } else {
+            document.querySelector("#idError").innerHTML = "";
+        }
+
+        let isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!isEmailValid) {
+            document.querySelector("#mailError").innerHTML = "Invalid Format";
+            isValid = false;
+        } else {
+            document.querySelector("#mailError").innerHTML = "";
+        }
+
+        // Validation logic for the second form
+        let isDegreeValid = /^[a-zA-Z\s]{10,}$/.test(degree);
+        if (!isDegreeValid) {
+            document.querySelector("#degreeError").innerHTML = "Degree should have at least 10 letters";
+            isValid = false;
+        } else {
+            document.querySelector("#degreeError").innerHTML = "";
+        }
+
+        if (!sem) {
+            document.querySelector("#semError").innerHTML = "Select a Semester";
+            isValid = false;
+        } else {
+            document.querySelector("#semError").innerHTML = "";
+        }
+
+        if (!grade) {
+            document.querySelector("#gradeError").innerHTML = "Select a Grade";
+            isValid = false;
+        } else {
+            document.querySelector("#gradeError").innerHTML = "";
+        }
+
+        
+    if (isFormValid()) {
+                const formData = {
+                    name,
+                    id,
+                    email,
+                    degree,
+                    sem,
+                    grade
+                };
+
+                fetch(`/update/${editId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Update successful!');
+                            window.location.href = '/table';
+                        } else {
+                            alert('Update failed. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error updating data. Please try again.');
+                    });
+            }
+            function isFormValid() {
+    const name = document.getElementById("name").value;
+    const id = document.getElementById("ide").value;
+    const email = document.getElementById("mail").value;
+    const degree = document.getElementById("de").value;
+    const sem = document.getElementById("sem").value;
+    const grade = document.getElementById("gde").value;
+
+    // Simple validation - check if required fields are not empty
+    if (!name || !id || !email || !degree || !sem || !grade) {
+        alert('Please fill in all the required fields.');
+        return false;
+    }
+
+    // You can add more specific validation checks here
+
+    return true;
+}
+ 
+    }
+    function redirectToTble(){
+        window.location.href="/table"
+    }
+
+</script>
+</body>
+
+</html>
